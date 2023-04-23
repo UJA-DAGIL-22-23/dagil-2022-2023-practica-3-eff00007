@@ -17,7 +17,7 @@ const client = new faunadb.Client({
     secret: 'fnAFCOS6HQAAzUTERHGq968gs6m01jTBct90EE_j',
 });
 
-const COLLECTION = "¿¿¿ COLECCION ???"
+const COLLECTION = "Atletas"
 
 // CALLBACKS DEL MODELO
 
@@ -93,9 +93,9 @@ const CB_OTHERS = {
         try {
             CORS(res).status(200).json({
                 mensaje: "Microservicio MS Plantilla: acerca de",
-                autor: "¿¿¿ AUTOR ???",
-                email: "¿¿¿ EMAIL ???",
-                fecha: "¿¿¿ FECHA ???"
+                autor: "Enrique Fernández Fernández",
+                email: "eff00007@red.ujaen.es",
+                fecha: "23/04/2023"
             });
         } catch (error) {
             CORS(res).status(500).json({ error: error.description })
