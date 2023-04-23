@@ -40,6 +40,25 @@ describe('API Gateway: rutas estáticas', () => {
         .end((error) => { error ? done.fail(error) : done() })
     });
   })
+
+
+  it('Devuelve Listado de nombres de todos los atletas', (done) => {
+    supertest(app)
+      .get('/plantilla/get_Atletas')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .expect(function (res) {
+        //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+        assert(res.body.data[0].data.hasOwnProperty('nombre'));
+       
+
+
+      })
+      .end((error) => { error ? done.fail(error) : done(); }
+      );
+  });
+
+
 });
 
 

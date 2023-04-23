@@ -19,6 +19,31 @@ Plantilla.datosDescargadosNulos = {
 }
 
 
+// Plantilla de datosAtletas vacíos
+Plantilla.datosAtletasNulos = {
+    nombre: "undefined",
+    apellido: "undefined",
+    edad: "undefined",
+    dni: "undefined",
+    medallas: "undefined",
+    direccion: "undefined",
+    rankingMundial: "undefined",
+}
+
+// Plantilla de tags 
+Plantilla.plantillaTags = {
+
+    "nombre": "### NOMBRE ###",
+    "apellido": "### APELLIDO ###",
+    "edad": "### EDAD ###",
+    "dni": "### DNI ###",
+    "medallas": "### MEDALLAS ###",
+    "direccion": "### DIRECCION ###",
+    "rankingMundial": "### RANKINGMUNDIAL ###"
+
+}
+
+
 /**
  * Función que descarga la info MS Plantilla al llamar a una de sus rutas
  * @param {string} ruta Ruta a descargar
@@ -109,3 +134,102 @@ Plantilla.procesarAcercaDe = function () {
 
 
 
+Plantilla.plantillaTablaArqueros = {}
+
+// Cabecera de la tabla para solo los nombres
+Plantilla.plantillaTablaArqueros.cabeceraNombres = `<table width="100%" class="listado_Atletas">
+<thead>
+    <th width="15%">Nombre</th>
+    <th width="15%">Apellido</th>
+</thead>
+<tbody>`;
+
+//Elementos RT que muestra los datos de un Arquero
+Plantilla.plantillaTablaArqueros.cuerpoNombres = `
+<tr title="${Plantilla.plantillaTags.NOMBRE}">
+    
+    <td>${Plantilla.plantillaTags.NOMBRE}</td>
+    <td>${Plantilla.plantillaTags.APELLIDO}</td>
+    <td>
+    <div></div>
+</td>
+</tr>
+`;
+//pie de la tabla 
+Plantilla.plantillaTablaAtletas.pie = `</tbody>
+</table>
+`;
+
+/**
+ * Actualiza el cuerpo de la plantilla deseada con los datos del arquero que se le pasa
+ * @param {String} plantilla Cadena conteniendo HTML en la que se desea cambiar lso campos de la plantilla por datos
+ * @param {Plantilla} Atleta Objeto con los datos del arquero que queremos escribir en el TR
+ * @returns La plantilla del cuerpo de la tabla con los datos actualizados 
+ */ 
+Plantilla.sustituyeTags = function (plantilla, Atleta) {
+    return plantilla
+        .replace(new RegExp(Plantilla.plantillaTags.NOMBRE, 'g'), Atleta.data.nombre)
+        .replace(new RegExp(Plantilla.plantillaTags.APELLIDO, 'g'), Atleta.data.apellido)
+}
+/**
+ * Actualiza el cuerpo de la tabla con los datos del arquero que se le pasa
+ * @param {arquero} Atleta Objeto con los datos de la persona que queremos escribir el TR
+ * @returns La plantilla de cuerpo de la tabla con los datos actualizados
+ */
+Plantilla.plantillaTablaArqueros.actualizaNombres = function (Atleta) {
+    return Plantilla.sustituyeTags(this.cuerpoNombres, Atleta)
+}
+
+
+
+/**
+ * Función que recuperar todos los pilotos llamando al MS Plantilla
+ * @param {función} callBackFn Función a la que se llamará una vez recibidos los datos.
+ */
+
+Plantilla.recupera = async function (callBackFn) {
+    let response = null
+
+    // Intento conectar con el microservicio 
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/get_Atletas"
+        response = await fetch(url)
+
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Gateway")
+        console.error(error)
+        //throw error
+    }
+
+    // Muestro todos los arqueros que se han descargado
+    let vectorAtletas = null
+    if (response) {
+        vectorAtletas  = await response.json()
+        callBackFn(vectorAtletas.data)
+    }
+}
+
+/**
+ * Función para mostrar solo los nombre de todos los arqueros
+ * que se recuperan de la BBDD
+ * @param {vector_de_Atletas} vector 
+ */
+Plantilla.imprimeSoloNombres = function (vector) {
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaAtletas.cabeceraNombres
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.plantillaTablaAtletas.actualizaNombres(e));
+    }
+    msj += Plantilla.plantillaTablaAtletas.pie
+
+    // Borrar toda la información del Article y la sustituyo por la que ma interesa
+    Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los Atletas", msj)
+}
+
+
+/**
+ * Función principal para recuperar solo los nombres de los arqueros desde el MS, y posteriormente imprimirlos
+ */
+Plantilla.procesarListaNombre = function () {
+    Plantilla.recupera(Plantilla.imprimeSoloNombres);
+}

@@ -49,3 +49,15 @@ router.get("/test_db", async (req, res) => {
 
 // Exporto el módulo para poder usarlo en server
 module.exports = router;
+
+
+/**
+ * Ruta de conexión de Atletas
+ */
+router.get("/get_atletas", async (req, res) => {
+    try {
+        await callbacks.get_atletas(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
