@@ -438,6 +438,10 @@ El código en ese repositorio muestra una aplicación similar, pero con mucha m�
 
 Además, incluye documentación sobre dicho código y un vídeo descriptivo de cómo se ha realizado y cómo funciona la aplicación de ejemplo.
 
+Alumno cursando la asignatura de Desarrollo Ágil de la Universidad de Jaén.
+* **Correo**: eff00007@red.ujaen.es
+* **GitHub**: https://github.com/eff00007
+* **Trello**: https://trello.com/b/t0u1rkB8/practica-1
 
 ### Url del tablero trello:
 ```
