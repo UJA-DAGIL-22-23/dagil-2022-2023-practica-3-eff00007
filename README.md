@@ -446,4 +446,4 @@ https://trello.com/b/O1EPHudl/practica-3
 
 
 ### Capturas de pantalla de fauna:
-(./assets/img/Base de datos.png)
+ <img src='assets\img\Base de datos.png' width='200px'>
