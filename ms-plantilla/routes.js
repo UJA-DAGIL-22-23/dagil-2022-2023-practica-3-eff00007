@@ -51,7 +51,7 @@ router.get("/test_db", async (req, res) => {
  */
 router.get("/get_Atletas_completos", async (req, res) => {
     try {
-        await callbacks.get_Arqueros(req, res)
+        await callbacks.get_Atletas(req, res)
     } catch (error) {
         console.log(error);
     }

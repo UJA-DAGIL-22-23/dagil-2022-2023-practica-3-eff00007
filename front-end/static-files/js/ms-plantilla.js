@@ -144,6 +144,19 @@ Plantilla.plantillaTablaAtletas.cabeceraNombres = `<table width="100%" class="li
 </thead>
 <tbody>`;
 
+// Cabecera de la tabla para todos los datos
+Plantilla.plantillaTablaAtletas.cabeceraCompleta = `<table width="100%" class="listado_Atletas_completo">
+<thead>
+    <th >Dni</th>
+    <th >Nombre</th>
+    <th >Apellido</th>
+    <th >RankingMundial</th>
+    <th >Edad</th>
+    <th >Direccion</th>
+    <th >medallas</th>
+</thead>
+<tbody>`;
+
 Plantilla.plantillaTablaAtletas.cuerpoNombres = `
 <tr title="${Plantilla.plantillaTags.NOMBRE}">
     
@@ -158,6 +171,23 @@ Plantilla.plantillaTablaAtletas.cuerpoNombres = `
 Plantilla.plantillaTablaAtletas.pie = `</tbody>
 </table>
 `;
+//Elementos RT que muestra los datos de un Atleta
+Plantilla.plantillaTablaAtletas.cuerpoCompleto = `
+<tr title="${Plantilla.plantillaTags.NOMBRE}">
+    <td>${Plantilla.plantillaTags.DNI}</td>
+    <td>${Plantilla.plantillaTags.NOMBRE}</td>
+    <td>${Plantilla.plantillaTags.APELLIDO}</td>
+    <td>${Plantilla.plantillaTags.RANKINGMUNDIAL}</td>
+    <td>${Plantilla.plantillaTags.EDAD}</td>
+    <td>${Plantilla.plantillaTags.DIRECCION}</td>
+    <td>${Plantilla.plantillaTags["MEDALLAS"]}</td>
+    <td>
+    <div></div>
+</td>
+</tr>
+`;
+
+
 
 /**
  * @param {String} plantilla Cadena conteniendo HTML en la que se desea cambiar lso campos de la plantilla por datos
@@ -166,9 +196,24 @@ Plantilla.plantillaTablaAtletas.pie = `</tbody>
  */ 
 Plantilla.sustituyeTags = function (plantilla, Atleta) {
     return plantilla
+        .replace(new RegExp(Plantilla.plantillaTags.DNI, 'g'), Atleta.data.dni)
         .replace(new RegExp(Plantilla.plantillaTags.NOMBRE, 'g'), Atleta.data.nombre)
         .replace(new RegExp(Plantilla.plantillaTags.APELLIDO, 'g'), Atleta.data.apellido)
+        .replace(new RegExp(Plantilla.plantillaTags.RANKINGMUNDIAL, 'g'), Atleta.data.rankingMundial)
+        .replace(new RegExp(Plantilla.plantillaTags.EDAD, 'g'), Atleta.data.edad)
+        .replace(new RegExp(Plantilla.plantillaTags.DIRECCION, 'g'), Atleta.data.direccion.calle +", "+Atleta.data.direccion.numero +", "+Atleta.data.direccion.ciudad+", "+Atleta.data.direccion.pais)
+        .replace(new RegExp(Plantilla.plantillaTags["MEDALLAS"], 'g'), Atleta.data.medallas)
+
 }
+/**
+ * Actualiza el cuerpo de la tabla con los datos de el Atleta que se le pasa
+ * @param {Atleta} Atleta Objeto con los datos de la persona que queremos escribir el TR
+ * @returns La plantilla des cuerpo de la tabla con los datos actualizados
+ */
+Plantilla.plantillaTablaAtletas.actualiza = function (Atleta) {
+    return Plantilla.sustituyeTags(this.cuerpoCompleto, Atleta)
+}
+
 /**
  * Actualiza el cuerpo de la tabla con los datos del Atleta que se le pasa
  * @param {Atleta} Atleta Objeto con los datos de la persona que queremos escribir el TR
@@ -178,6 +223,49 @@ Plantilla.plantillaTablaAtletas.actualizaNombres = function (Atleta) {
     return Plantilla.sustituyeTags(this.cuerpoNombres, Atleta)
 }
 
+/**
+ * Función que recuperar todos los pilotos llamando al MS Plantilla
+ * @param {función} callBackFn Función a la que se llamará una vez recibidos los datos.
+ */
+
+Plantilla.recuperaCompleto = async function (callBackFn) {
+    let response = null
+
+    // Intento conectar con el microservicio 
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/get_Atletas_completos"
+        response = await fetch(url)
+
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Gateway")
+        console.error(error)
+        //throw error
+    }
+
+    // Muestro todos los Atletas que se han descargado
+    let vectorAtletas = null
+    if (response) {
+        vectorAtletas  = await response.json()
+        callBackFn(vectorAtletas.data)
+    }
+}
+
+/**
+ * Función para mostrar solo los nombre de todos los Atletas
+ * que se recuperan de la BBDD
+ * @param {vector_de_Atletas} vector 
+ */
+Plantilla.imprimeCompleto = function (vector) {
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaAtletas.cabeceraCompleta
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.plantillaTablaAtletas.actualiza(e));
+    }
+    msj += Plantilla.plantillaTablaAtletas.pie
+
+    // Borrar toda la información del Article y la sustituyo por la que ma interesa
+    Frontend.Article.actualizar("Plantilla del listado de todos los datos de todos los Atletas", msj)
+}
 
 
 /**
@@ -206,6 +294,14 @@ Plantilla.recupera = async function (callBackFn) {
     }
 }
 
+
+/**
+ * Función principal para recuperar solo los nombres de los Atletas desde el MS, y posteriormente imprimirlos
+ */
+Plantilla.procesarListaEntera = function () {
+    Plantilla.recuperaCompleto(Plantilla.imprimeCompleto);
+}
+
 /**
  * @param {vector_de_Atletas} vector 
  */
@@ -228,3 +324,4 @@ Plantilla.imprimeSoloNombres = function (vector) {
 Plantilla.procesarListaNombre = function () {
     Plantilla.recupera(Plantilla.imprimeSoloNombres);
 }
+
