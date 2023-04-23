@@ -39,7 +39,7 @@ describe('Servidor PLANTILLA:', () => {
           //console.log( "BODY ACERCA DE ", res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.hasOwnProperty('mensaje'));
           assert(res.body.mensaje === "Microservicio MS Plantilla: acerca de");
-          
+
           assert(res.body.autor == "Enrique Fernández Fernández");
           assert(res.body.email == "eff00007@red.ujaen.es");
           assert(res.body.fecha == "23-04-2023");
@@ -72,3 +72,24 @@ describe('Servidor PLANTILLA:', () => {
 });
 
 
+
+    /**
+   * Tests para acceso a la lista de Atletas
+   */
+    describe('Acceso a listado de atletas:', () => {
+      it('Devuelve Listado de nombres de todos los atletas mediante test_db', (done) => {
+        supertest(app)
+          .get('/get_Atletas')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .expect(function (res) {
+            //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+            assert(res.body.data.hasOwnProperty('nombre'));
+
+
+          })
+          .end((error) => { error ? done.fail(error) : done(); }
+          );
+      });
+
+    })
