@@ -468,3 +468,12 @@ https://trello.com/b/O1EPHudl/practica-3
 }
 ```
 
+
+### Funcionalidad 1 
+   <img src='assets\img\funcionalidad 1.png' width='500px'>
+
+### Funcionalidad 2
+   <img src='assets\img\funcionalidad 2.png' width='500px'>
+
+### Trello 2
+   <img src='assets\img\trello funcionalidad 2.png' width='500px'>
