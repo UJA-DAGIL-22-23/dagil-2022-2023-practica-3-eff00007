@@ -443,3 +443,7 @@ Además, incluye documentación sobre dicho código y un vídeo descriptivo de c
 ```
 https://trello.com/b/O1EPHudl/practica-3
 ```
+
+
+### Capturas de pantalla de fauna:
+(./assets/img/Base de datos.png)
