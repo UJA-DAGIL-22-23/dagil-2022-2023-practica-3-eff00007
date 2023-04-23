@@ -46,6 +46,16 @@ router.get("/test_db", async (req, res) => {
     }
 });
 
+/**
+ * Ruta de conexión de atletas
+ */
+router.get("/get_Atletas_completos", async (req, res) => {
+    try {
+        await callbacks.get_Arqueros(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 // Exporto el módulo para poder usarlo en server
 module.exports = router;
