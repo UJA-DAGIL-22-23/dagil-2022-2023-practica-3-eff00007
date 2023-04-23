@@ -42,6 +42,13 @@ describe('API Gateway: rutas estáticas', () => {
   })
 
 
+  it('Devuelve Ana, nombre de la primera Atleta', (done) => {
+    supertest(app)
+      .get('/plantilla/get_Atletas')
+      .expect(200)
+    })
+
+
   it('Devuelve Listado de nombres de todos los atletas', (done) => {
     supertest(app)
       .get('/plantilla/get_Atletas')
@@ -59,9 +66,31 @@ describe('API Gateway: rutas estáticas', () => {
   });
 
 
+
 });
 
+/**
+   * Tests para acceso a la lista de Atletas completa
+   */
+it('Devuelve todos los datos de todos los Atletas', (done) => {
+  supertest(app)
+    .get('/get_Atletas_completos')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .expect(function (res) {
+      //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+      assert(res.body.data[0].data.hasOwnProperty('nombre'));
+      assert(res.body.data[0].data.hasOwnProperty('apellido'));
+      assert(res.body.data[0].data.hasOwnProperty('edad'));
+      assert(res.body.data[0].data.hasOwnProperty('dni'));
+      assert(res.body.data[0].data.hasOwnProperty('medallas'));
+      assert(res.body.data[0].data.hasOwnProperty('direccion'));
+      assert(res.body.data[0].data.hasOwnProperty('rankingMundial'));
+      assert(res.body.data.length === 10);
 
 
-
+    })
+    .end((error) => { error ? done.fail(error) : done(); }
+    );
+});
 

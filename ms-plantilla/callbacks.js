@@ -103,7 +103,7 @@ const CB_OTHERS = {
     },
 
  /**
-     * Método para obtener todas los arqueros de la BBDD.
+     * Método para obtener todas los Atletas de la BBDD.
      * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
      * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
      */
@@ -115,7 +115,32 @@ const CB_OTHERS = {
                 q.Lambda("X", q.Get(q.Var("X")))
             )
         )
-        // console.log( arqueros ) // Para comprobar qué se ha devuelto en personas
+        // console.log( Atletas ) // Para comprobar qué se ha devuelto en personas
+        CORS(res)
+            .status(200)
+            .json(Atletas)
+    } catch (error) {
+        CORS(res).status(500).json({ error: error.description })
+    }
+},
+
+
+
+
+/**
+     * Método para obtener todas los Atletas de la BBDD.
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
+     */
+get_Atletas_completos: async (req, res) => {
+    try {
+        let Atletas = await client.query(
+            q.Map(
+                q.Paginate(q.Documents(q.Collection(COLLECTION))),
+                q.Lambda("X", q.Get(q.Var("X")))
+            )
+        )
+        // console.log( Atletas ) // Para comprobar qué se ha devuelto en personas
         CORS(res)
             .status(200)
             .json(Atletas)
@@ -132,3 +157,6 @@ const CB_OTHERS = {
 // MUY IMPORTANTE: No debe haber callbacks con el mismo nombre en los distintos objetos, porque si no
 //                 el último que haya SOBREESCRIBE a todos los anteriores.
 exports.callbacks = { ...CB_MODEL_SELECTS, ...CB_OTHERS }
+
+
+

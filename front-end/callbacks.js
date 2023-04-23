@@ -41,3 +41,6 @@ const CB_OTHERS = {
 // OJO: No debe haber callbacks con el mismo nombre en los distintos objetos, porque si no
 // el último que haya sobreescribe a todos los anteriores.
 exports.callbacks = {  ...CB_OTHERS }
+
+
+f
