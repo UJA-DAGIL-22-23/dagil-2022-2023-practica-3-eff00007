@@ -449,3 +449,22 @@ https://trello.com/b/O1EPHudl/practica-3
  <img src='assets\img\Base de datos.png' width='500px'>
   <img src='assets\img\Colección.png' width='500px'>
    <img src='assets\img\Home fauna.png' width='500px'>
+
+### Documentos de la coleccion en formato JSON:
+```
+{
+  nombre: "Ana",
+  apellido: "Romero",
+  edad: 22,
+  dni: "01234567H",
+  medallas: [2018],
+  direccion: {
+    calle: "Calle A",
+    numero: "123",
+    ciudad: "Sevilla",
+    pais: "España"
+  },
+  rankingMundial: 19
+}
+```
+
