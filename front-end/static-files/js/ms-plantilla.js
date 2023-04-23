@@ -33,13 +33,13 @@ Plantilla.datosAtletasNulos = {
 // Plantilla de tags 
 Plantilla.plantillaTags = {
 
-    "nombre": "### NOMBRE ###",
-    "apellido": "### APELLIDO ###",
-    "edad": "### EDAD ###",
-    "dni": "### DNI ###",
-    "medallas": "### MEDALLAS ###",
-    "direccion": "### DIRECCION ###",
-    "rankingMundial": "### RANKINGMUNDIAL ###"
+    "NOMBRE": "### NOMBRE ###",
+    "APELLIDO": "### APELLIDO ###",
+    "EDAD": "### EDAD ###",
+    "DNI": "### DNI ###",
+    "MEDALLAS": "### MEDALLAS ###",
+    "DIRECCION": "### DIRECCION ###",
+    "RANKINGMUNDIAL": "### RANKINGMUNDIAL ###"
 
 }
 
@@ -134,18 +134,17 @@ Plantilla.procesarAcercaDe = function () {
 
 
 
-Plantilla.plantillaTablaArqueros = {}
+Plantilla.plantillaTablaAtletas = {}
 
 // Cabecera de la tabla para solo los nombres
-Plantilla.plantillaTablaArqueros.cabeceraNombres = `<table width="100%" class="listado_Atletas">
+Plantilla.plantillaTablaAtletas.cabeceraNombres = `<table width="100%" class="listado_Atletas">
 <thead>
     <th width="15%">Nombre</th>
     <th width="15%">Apellido</th>
 </thead>
 <tbody>`;
 
-//Elementos RT que muestra los datos de un Arquero
-Plantilla.plantillaTablaArqueros.cuerpoNombres = `
+Plantilla.plantillaTablaAtletas.cuerpoNombres = `
 <tr title="${Plantilla.plantillaTags.NOMBRE}">
     
     <td>${Plantilla.plantillaTags.NOMBRE}</td>
@@ -161,9 +160,8 @@ Plantilla.plantillaTablaAtletas.pie = `</tbody>
 `;
 
 /**
- * Actualiza el cuerpo de la plantilla deseada con los datos del arquero que se le pasa
  * @param {String} plantilla Cadena conteniendo HTML en la que se desea cambiar lso campos de la plantilla por datos
- * @param {Plantilla} Atleta Objeto con los datos del arquero que queremos escribir en el TR
+ * @param {Plantilla} Atleta Objeto con los datos del Atleta que queremos escribir en el TR
  * @returns La plantilla del cuerpo de la tabla con los datos actualizados 
  */ 
 Plantilla.sustituyeTags = function (plantilla, Atleta) {
@@ -172,18 +170,17 @@ Plantilla.sustituyeTags = function (plantilla, Atleta) {
         .replace(new RegExp(Plantilla.plantillaTags.APELLIDO, 'g'), Atleta.data.apellido)
 }
 /**
- * Actualiza el cuerpo de la tabla con los datos del arquero que se le pasa
- * @param {arquero} Atleta Objeto con los datos de la persona que queremos escribir el TR
+ * Actualiza el cuerpo de la tabla con los datos del Atleta que se le pasa
+ * @param {Atleta} Atleta Objeto con los datos de la persona que queremos escribir el TR
  * @returns La plantilla de cuerpo de la tabla con los datos actualizados
  */
-Plantilla.plantillaTablaArqueros.actualizaNombres = function (Atleta) {
+Plantilla.plantillaTablaAtletas.actualizaNombres = function (Atleta) {
     return Plantilla.sustituyeTags(this.cuerpoNombres, Atleta)
 }
 
 
 
 /**
- * Función que recuperar todos los pilotos llamando al MS Plantilla
  * @param {función} callBackFn Función a la que se llamará una vez recibidos los datos.
  */
 
@@ -201,7 +198,7 @@ Plantilla.recupera = async function (callBackFn) {
         //throw error
     }
 
-    // Muestro todos los arqueros que se han descargado
+    
     let vectorAtletas = null
     if (response) {
         vectorAtletas  = await response.json()
@@ -210,8 +207,6 @@ Plantilla.recupera = async function (callBackFn) {
 }
 
 /**
- * Función para mostrar solo los nombre de todos los arqueros
- * que se recuperan de la BBDD
  * @param {vector_de_Atletas} vector 
  */
 Plantilla.imprimeSoloNombres = function (vector) {
@@ -228,7 +223,7 @@ Plantilla.imprimeSoloNombres = function (vector) {
 
 
 /**
- * Función principal para recuperar solo los nombres de los arqueros desde el MS, y posteriormente imprimirlos
+ * Función principal para recuperar solo los nombres de los Atleta desde el MS, y posteriormente imprimirlos
  */
 Plantilla.procesarListaNombre = function () {
     Plantilla.recupera(Plantilla.imprimeSoloNombres);
