@@ -490,7 +490,7 @@ https://trello.com/b/O1EPHudl/practica-3
 ### Trello 4
    <img src='assets\img\trello 4.png' width='500px'>
 
-## PRIMER INCREMENTO
+## SEGUNDO INCREMENTO
 
 ### Funcionalidad 3
    <img src='assets\img\funcionalidad 3.png' width='500px'>
