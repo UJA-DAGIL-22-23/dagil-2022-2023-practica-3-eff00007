@@ -32,11 +32,13 @@
             title="Muestra los nombres de los Atletas ordenados de la base de datos">Lista de nombres ordenada</a> 
             <a href="javascript:Plantilla.procesarListaEntera()" class="opcion-principal"
             title="Muestra toda la informacion de los atletas">mostrar todo</a>   
-            <a href="javascript:Plantilla.procesarListaNombreOrdenado()" class="opcion-principal"
-            title="Muestra los nombres de los Atletas ordenados de la base de datos">Lista de nombres ordenada</a>
-            
-    </nav>
-
+           
+            <div></div>
+            <input type="text" placeholder="Apellido" id="criterio-1">
+            <input type="text" placeholder="Nombre" id="criterio-2">
+            <input type="text" placeholder="Edad" id="criterio-3">
+            <button class="btn" onclick="Plantilla.procesarListaCriteriosPrecisa(document.getElementById('criterio-1').value, document.getElementById('criterio-2').value, document.getElementById('criterio-3').value, true)">Buscar por criterios</button>
+            <button class="btn" onclick="Plantilla.procesarListaCriteriosPrecisa(document.getElementById('criterio-1').value, document.getElementById('criterio-2').value, document.getElementById('criterio-3').value, false)">Buscar por algún criterio</button>
     <!-- 
         Article en el que se va a mostrar la info cuando se pinche una opción del menú 
         Todos los apartados de este article se rellenarán con funciones en Javascript
