@@ -281,7 +281,7 @@ Plantilla.recupera = async function (callBackFn, direccion) {
  */
 Plantilla.procesarListaEntera = function () {
     Plantilla.recupera(Plantilla.imprimeCompleto,"/plantilla/get_Atletas_completos");}
-
+    
 /**
  * @param {vector_de_Atletas} vector 
  */
