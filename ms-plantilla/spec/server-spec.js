@@ -146,9 +146,10 @@ describe('Servidor PLANTILLA:', () => {
 
 
 
-      });
 
-    })
+      })
+      .end((error) => { error ? done.fail(error) : done(); }
+      );
+  });
 
-});
-
+})
