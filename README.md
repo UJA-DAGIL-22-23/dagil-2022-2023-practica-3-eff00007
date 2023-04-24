@@ -441,7 +441,7 @@ Además, incluye documentación sobre dicho código y un vídeo descriptivo de c
 Alumno cursando la asignatura de Desarrollo Ágil de la Universidad de Jaén.
 * **Correo**: eff00007@red.ujaen.es
 * **GitHub**: https://github.com/eff00007
-* **Trello**: https://trello.com/b/t0u1rkB8/practica-1
+* **Trello**: https://trello.com/b/O1EPHudl/practica-3
 
 ### Url del tablero trello:
 ```
