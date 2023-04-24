@@ -298,6 +298,40 @@ Plantilla.imprimeSoloNombres = function (vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los Atletas", msj)
 }
 
+
+
+/**
+ * Función que recupera todos los Atletas llamando al MS Plantilla
+ * Posteriormente, llama a la función callBackFn para trabajar con los datos recperados.
+ * @param {string} nombreBuscado El nombre que se busca
+ * @param {funcion} callBackFn Función a la que se llamará una vez recibidos los datos
+ */
+Plantilla.BuscaPorNombre = async function (nombreBuscado, callBackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/get_Atletas_completos"
+        const response = await fetch(url);
+        let vectorAtletas = null
+        if (response) {
+            vectorAtletas = await response.json()
+
+                const filtro = vectorAtletas.data.filter(Atleta => Atleta.data.nombre === nombreBuscado)
+                callBackFn(filtro)    
+
+
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+}
+
+/**
+
+
+
+
+
+
 /**
  * Función que imprime todos los datos de todos los jugadores que se recuperan de la BBDD ordenados alfabéticamente
  * @param {vector_de_Atletas} vector 
@@ -358,6 +392,16 @@ Plantilla.BuscaPorCriteriosTodos = async function (criterio1, criterio2, criteri
 Plantilla.procesarListaCriteriosPrecisa = function (aspecto1, aspecto2, aspecto3, tipo) {
     this.BuscaPorCriteriosTodos(aspecto1, aspecto2, aspecto3,tipo, this.imprimeCompleto); 
 }
+
+
+/**
+ * Función que muestra los arqueros con los criterios indicados exactamente
+ * @param {string} nombre El nombre que se busca
+ */
+Plantilla.procesarListaBusquedaNombre = function (nombre) {
+    this.BuscaPorNombre(nombre, this.imprimeCompleto); 
+}
+
 
 /**
  * Función que imprime todos los datos de todos los jugadores que se recuperan de la BBDD ordenados alfabéticamente
@@ -429,3 +473,5 @@ Plantilla.procesarListaNombreOrdenado = function() {
 Plantilla.procesarListaNombreOrdenado = function() {
     Plantilla.recupera(Plantilla.imprimeOrdenados,"/plantilla/get_Atletas");
 }
+
+
