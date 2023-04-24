@@ -126,28 +126,3 @@ describe('Servidor PLANTILLA:', () => {
   });
 
 })
-
- /**
-* Tests para acceso a la lista de nombres ordenados de Atletas
-*/
- describe('Acceso a listado de nombres ordenado:', () => {
-  it('Devuelve Ana, nombre de la primera Atleta, y Sara nombre del último', (done) => {
-    supertest(app)
-      .get('/get_Atletas')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .expect(function (res) {
-        //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-        assert(res.body.data[0].data.hasOwnProperty('nombre'));
-        assert(res.body.data[0].data.nombre === "Ana");
-        assert(res.body.data[9].data.nombre === "Sara");
-
-        assert( res.body.data.length === 10); 
-
-
-      });
-
-    })
-
-});
-

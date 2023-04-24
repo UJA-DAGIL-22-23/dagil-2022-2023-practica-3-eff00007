@@ -225,6 +225,15 @@ Plantilla.plantillaTablaAtletas.actualizaNombres = function (Atleta) {
 
 
 /**
+ * Actualiza el cuerpo de la tabla con los datos del Atleta que se le pasa
+ * @param {Atleta} Atleta Objeto con los datos de la persona que queremos escribir el TR
+ * @returns La plantilla de cuerpo de la tabla con los datos actualizados
+ */
+Plantilla.plantillaTablaAtletas.actualizaNombresOrdenados = function (Atleta) {
+    return Plantilla.sustituyeTags(this.cuerpoNombres, Atleta)
+}
+
+/**
  * Función para mostrar solo los nombre de todos los Atletas
  * que se recuperan de la BBDD
  * @param {vector_de_Atletas} vector 
@@ -273,7 +282,7 @@ Plantilla.recupera = async function (callBackFn, direccion) {
  * Función principal para recuperar solo los nombres de los Atletas desde el MS, y posteriormente imprimirlos
  */
 Plantilla.procesarListaEntera = function () {
-    Plantilla.recuperaCompleto(Plantilla.imprimeCompleto,"/plantilla/get_arqueros_completos");
+    Plantilla.recuperaCompleto(Plantilla.imprimeCompleto,"/plantilla/get_Atletas_completos");
 }
 
 /**
@@ -291,11 +300,69 @@ Plantilla.imprimeSoloNombres = function (vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los Atletas", msj)
 }
 
+/**
+ * Función que imprime todos los datos de todos los jugadores que se recuperan de la BBDD ordenados alfabéticamente
+ * @param {vector_de_Atletas} vector 
+ */
+Plantilla.imprimeOrdenados = function(vector) {
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaAtletas.cabeceraNombres
+    if (vector && Array.isArray(vector)) {
+        vector.sort(function(a, b) {
+            let nombreA = a.data.nombre.toUpperCase(); 
+            let nombreB = b.data.nombre.toUpperCase(); 
+            if (nombreA > nombreB) {
+                return 1;
+            }
+            if (nombreA < nombreB) {
+                return -1;
+            }
+            return 0;
+        });
+
+        vector.forEach(e => msj += Plantilla.plantillaTablaAtletas.actualizaNombresOrdenados(e));
+    }
+    msj += Plantilla.plantillaTablaAtletas.pie
+
+    // Borrar toda la información del Article y la sustituyo por la que ma interesa
+    Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los Atletas ordenados", msj)
+}
+
+
+
+/**
+ * Función que imprime todos los datos de todos los jugadores que se recuperan de la BBDD ordenados alfabéticamente
+ * @param {vector_de_Atletas} vector 
+ */
+Plantilla.Ordena = function(vector) {
+
+    vector.sort(function(min, max) {
+        let nameMin = min.data.name.toUpperCase(); 
+        let nameMax = max.data.name.toUpperCase(); 
+        if (nameMin < nameMax) {
+            return -1;
+        }
+        if (nameMin > nameMax) {
+            return 1;
+        }
+        return 0;
+    });
+
+}
+
 
 /**
  * Función principal para recuperar solo los nombres de los Atleta desde el MS, y posteriormente imprimirlos
  */
 Plantilla.procesarListaNombre = function () {
-    Plantilla.recupera(Plantilla.imprimeSoloNombress,"/plantilla/get_arqueros");
+    Plantilla.recupera(Plantilla.imprimeSoloNombress,"/plantilla/get_Atletas");
 }
 
+
+
+/**
+ * Funcion que lista los nombres de los Atletas ordenados alfabéticamente
+ */
+Plantilla.procesarListaNombreOrdenado = function() {
+    Plantilla.recupera(Plantilla.imprimeOrdenados,"/plantilla/get_Atletas");
+}
