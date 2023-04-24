@@ -472,6 +472,8 @@ https://trello.com/b/O1EPHudl/practica-3
 }
 ```
 
+## PRIMER INCREMENTO
+
 
 ### Funcionalidad 1 
    <img src='assets\img\funcionalidad 1.png' width='500px'>
@@ -481,3 +483,9 @@ https://trello.com/b/O1EPHudl/practica-3
 
 ### Trello 2
    <img src='assets\img\trello funcionalidad 2.png' width='500px'>
+
+### Funcionalidad 4
+   <img src='assets\img\funcionalidad 4.png' width='500px'>
+
+### Trello 4
+   <img src='assets\img\trello 4.png' width='500px'>
