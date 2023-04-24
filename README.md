@@ -438,6 +438,8 @@ El código en ese repositorio muestra una aplicación similar, pero con mucha m�
 
 Además, incluye documentación sobre dicho código y un vídeo descriptivo de cómo se ha realizado y cómo funciona la aplicación de ejemplo.
 
+
+### Enrique Fernández Fernández
 Alumno cursando la asignatura de Desarrollo Ágil de la Universidad de Jaén.
 * **Correo**: eff00007@red.ujaen.es
 * **GitHub**: https://github.com/eff00007
@@ -469,6 +471,141 @@ https://trello.com/b/O1EPHudl/practica-3
     pais: "España"
   },
   rankingMundial: 19
+}
+
+{
+  nombre: "Julia",
+  apellido: "Martinez",
+  edad: 22,
+  dni: "45624956D",
+  medallas: [2018],
+  direccion: {
+    calle: "Calle B",
+    numero: "2353",
+    ciudad: "Jaén",
+    pais: "España"
+  },
+  rankingMundial: 23
+}
+
+{
+  nombre: "Carolina",
+  apellido: "García",
+  edad: 24,
+  dni: "54567043B",
+  medallas: [2012, 2016],
+  direccion: {
+    calle: "Calle C",
+    numero: "456",
+    ciudad: "Barcelona",
+    pais: "España"
+  },
+  rankingMundial: 8
+}
+
+{
+  nombre: "Eva",
+  apellido: "Fernández",
+  edad: 22,
+  dni: "56034564C",
+  medallas: [2016],
+  direccion: {
+    calle: "Calle D",
+    numero: "332",
+    ciudad: "Valencia",
+    pais: "España"
+  },
+  rankingMundial: 12
+}
+
+{
+  nombre: "Sara",
+  apellido: "López",
+  edad: 1043,
+  dni: "33224183V",
+  medallas: [2018],
+  direccion: {
+    calle: "Calle E",
+    numero: "1",
+    ciudad: "Andujar",
+    pais: "España"
+  },
+  rankingMundial: 18
+}
+
+{
+  nombre: "Manolillo",
+  apellido: "Lara",
+  edad: 2,
+  dni: "12345432B",
+  medallas: [2012, 2016, 2020],
+  direccion: {
+    calle: "Calle F",
+    numero: "5214",
+    ciudad: "Andujar",
+    pais: "España"
+  },
+  rankingMundial: 1
+}
+
+{
+  nombre: "Antonio",
+  apellido: "Hernandez",
+  edad: 20,
+  dni: "34520954J",
+  medallas: [2014],
+  direccion: {
+    calle: "Calle F",
+    numero: "6",
+    ciudad: "Madriz",
+    pais: "España"
+  },
+  rankingMundial: 14
+}
+
+{
+  nombre: "Clara",
+  apellido: "Díaz",
+  edad: 26,
+  dni: "56673985F",
+  medallas: [2010, 2014, 2018],
+  direccion: {
+    calle: "Calle G",
+    numero: "4",
+    ciudad: "Valencia",
+    pais: "España"
+  },
+  rankingMundial: 6
+}
+
+{
+  nombre: "Andrea",
+  apellido: "Cobo",
+  edad: 21,
+  dni: "54326798R",
+  medallas: [2012, 2014],
+  direccion: {
+    calle: "Calle E",
+    numero: "5673",
+    ciudad: "Jaén",
+    pais: "España"
+  },
+  rankingMundial: 5467
+}
+
+{
+  nombre: "Ana",
+  apellido: "Fernández",
+  edad: 27,
+  dni: "54306754H",
+  medallas: [2020, 2022],
+  direccion: {
+    calle: "Calle B",
+    numero: "2",
+    ciudad: "Barcelona",
+    pais: "España"
+  },
+  rankingMundial: 4521
 }
 ```
 
