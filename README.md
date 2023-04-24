@@ -497,3 +497,12 @@ https://trello.com/b/O1EPHudl/practica-3
 
 ### Trello 3
    <img src='assets\img\trello 3.png' width='500px'>
+
+### Funcionalidad 10
+   <img src='assets\img\funcionalidad 10.png' width='500px'>
+
+### Funcionalidad 11
+   <img src='assets\img\funcionalidad 11.png' width='500px'>
+
+### Trello 11
+   <img src='assets\img\trello 11.png' width='500px'>

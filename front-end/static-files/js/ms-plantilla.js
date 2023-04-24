@@ -326,7 +326,38 @@ Plantilla.imprimeOrdenados = function(vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los Atletas ordenados", msj)
 }
 
+/**
+ * Función que recupera todos los Atletas llamando al MS Plantilla
+ * Posteriormente, llama a la función callBackFn para trabajar con los datos recperados.
+ * @param {string} criterio1 El primer criterio que se busca
+ * @param {string} criterio2 El segundo criterio que se busca
+ * @param {string} criterio3 El tercer criterio que se busca
+ * @param {funcion} callBackFn Función a la que se llamará una vez recibidos los datos
+ */
+Plantilla.BuscaPorCriteriosTodos = async function (criterio1, criterio2, criterio3,tipo, callBackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/get_Atletas_completos"
+        const response = await fetch(url);
+        let vectorAtletas = null
+        if (response) {
+            vectorAtletas = await response.json()
 
+            if(tipo){
+                const filtro = vectorAtletas.data.filter(Atleta => Atleta.data.nombre === criterio1 && Atleta.data.apellido === criterio2 && Atleta.data.edad === parseInt(criterio3))
+                callBackFn(filtro)    
+            }else{
+            const filtro = vectorAtletas.data.filter(Atleta => Atleta.data.nombre === criterio1 || Atleta.data.apellido === criterio2 || Atleta.data.edad === parseInt(criterio3))
+            callBackFn(filtro)}
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+}
+
+Plantilla.procesarListaCriteriosPrecisa = function (aspecto1, aspecto2, aspecto3, tipo) {
+    this.BuscaPorCriteriosTodos(aspecto1, aspecto2, aspecto3,tipo, this.imprimeCompleto); 
+}
 
 /**
  * Función que imprime todos los datos de todos los jugadores que se recuperan de la BBDD ordenados alfabéticamente
